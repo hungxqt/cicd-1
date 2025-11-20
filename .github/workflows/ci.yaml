@@ -162,11 +162,11 @@ jobs:
         run: |
           docker run -d \
             --name chat-app-frontend \
-            -p 80:80 \
+            -p 9080:80 \
             ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-frontend:${{ env.COMMIT_SHA }}
 
       - name: Show frontend URL
         run: |
           IP=$(hostname -I | awk '{print $1}')
-          echo "Frontend deployed on http://$IP"
+          echo "Frontend deployed on http://$IP:9080"
     
