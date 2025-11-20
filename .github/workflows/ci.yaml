@@ -22,6 +22,7 @@ jobs:
     outputs:
       frontend: ${{ steps.filter.outputs.frontend }}
       backend:  ${{ steps.filter.outputs.backend }}
+      sha: ${{ steps.sha.outputs.sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
