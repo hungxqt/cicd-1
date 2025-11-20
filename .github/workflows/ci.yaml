@@ -135,7 +135,7 @@ jobs:
 
   deploy-frontend:
     runs-on: self-hosted
-    needs: build-and-test-frontend, detect-changes
+    needs: [build-and-test-frontend, detect-changes]
     environment:
       name: production
     # if: needs.detect-changes.outputs.frontend == 'true'
