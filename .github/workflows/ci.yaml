@@ -80,12 +80,11 @@ jobs:
 
       - name: Build frontend
         working-directory: ./public
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-frontend:${ COMMIT_SHA } -f ./Dockerfile .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-frontend:${{ env.COMMIT_SHA }} -f ./Dockerfile .
 
       - name: Push frontend image to Docker Hub
         working-directory: ./public
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-frontend:${ COMMIT_SHA }
-
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-frontend:${{ env.COMMIT_SHA }}
       - name: Finish frontend job
         run: echo "Frontend build and push completed."
 
@@ -127,11 +126,11 @@ jobs:
 
       - name: Build backend
         working-directory: ./server
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-backend:${ COMMIT_SHA } -f ./Dockerfile . 
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-backend:${{ env.COMMIT_SHA }} -f ./Dockerfile . 
         
       - name: Push backend image to Docker Hub
         working-directory: ./server
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-backend:${ COMMIT_SHA }
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-backend:${{ env.COMMIT_SHA }}
       - name: Finish backend job
         run: echo "Backend build and push completed."
 
@@ -164,7 +163,7 @@ jobs:
           docker run -d \
             --name chat-app-frontend \
             -p 80:80 \
-            ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-frontend:${ COMMIT_SHA }
+            ${{ secrets.DOCKERHUB_USERNAME }}/chat-app-frontend:${{ env.COMMIT_SHA }}
 
       - name: Show frontend URL
         run: |
