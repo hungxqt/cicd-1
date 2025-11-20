@@ -150,8 +150,7 @@ jobs:
       - name: Stop old container if exists
         run: |
           if [ "$(docker ps -q -f name=chat-app-frontend)" ]; then
-            docker stop chat-app-frontend
-            docker rm chat-app-frontend
+            docker rm -f $(docker ps -q -f name=chat-app-frontend)
           fi
 
       - name: Pull new image
